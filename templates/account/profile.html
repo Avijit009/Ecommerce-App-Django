@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Profile
+{% endblock title %}
+
+{% block content %}
+<h3>Profile</h3>
+    <form method="POST">
+        {{form.as_p}}
+        {% csrf_token %}
+        <button type="submit" class="btn btn-warning">Update</button>
+    </form>
+{% endblock content %}
