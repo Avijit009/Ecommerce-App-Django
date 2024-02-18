@@ -93,7 +93,7 @@ class Vendor(models.Model):
     address = models.CharField(max_length=255)
 
     def __str__(self):
-        return self.user.user_profile.fullname
+        return self.user.profile.full_name
 
     def is_fully_filled(self):
         field_names = [f.name for f in self._meta.get_fields()]
@@ -112,4 +112,4 @@ def create_profile(sender, instance, created, **kwargs):
 
 @receiver(post_save, sender=User)
 def save_profile(sender, instance, **kwargs):
-    instance.user_profile.save()
+    instance.profile.save()

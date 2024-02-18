@@ -15,7 +15,7 @@ class CartAdmin(admin.ModelAdmin):
 class OrderAdmin(admin.ModelAdmin):
     '''Admin View for Order'''
 
-    list_display = ('id', 'ordered', 'order_id', 'payment_id', 'status','coupon')
+    list_display = ('id', 'ordered', 'orderId', 'paymentId', 'status','coupon')
     list_per_page = 10
     list_editable = ['status']
 
