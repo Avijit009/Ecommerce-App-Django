@@ -7,7 +7,6 @@ from account.models import Vendor
 
 class Category(models.Model):
     title = models.CharField(max_length=50)
-    created = models.DateTimeField(auto_now_add=True)
     
     def __str__(self) -> str:
         return self.title
