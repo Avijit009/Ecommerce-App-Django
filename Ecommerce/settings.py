@@ -101,6 +101,7 @@ DATABASES = {
     }
 }
 
+#admin- avijitdash2@gmail.com-123456
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators

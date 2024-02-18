@@ -28,18 +28,18 @@ Cart
             <td>{{cart.item.product_name}}</td>
             <td>&#2547; {{cart.item.price}}</td>
             <td>
-                <a href="{% url 'App_order:decrease' pk=cart.item.pk%}" class="text-decoration-none">–</a>
+                <a href="{% url 'decrease' pk=cart.item.pk%}" class="text-decoration-none">–</a>
                 {{cart.quantity}}
-                <a href="{% url 'App_order:increase' pk=cart.item.pk %}" class="text-decoration-none">+</a>
+                <a href="{% url 'increase' pk=cart.item.pk %}" class="text-decoration-none">+</a>
             </td>
             <td>&#2547; {{cart.get_total}}</td>
-            <td><a href="{% url 'App_order:remove_item' pk=cart.item.pk%}" class="btn btn-danger">Remove</a></td>
+            <td><a href="{% url 'remove_item' pk=cart.item.pk%}" class="btn btn-danger">Remove</a></td>
         </tr>
         {% endfor %}
         <tr>
             <td colspan="3">
-                <a href="{% url 'App_payment:checkout'%}" class="btn btn-success">Proceed To Checkout</a>
-                <a href="{% url 'App_shop:home' %}" class="btn btn-warning">Continue Shoping</a>
+                <a href="{% url 'checkout'%}" class="btn btn-success">Proceed To Checkout</a>
+                <a href="{% url 'home' %}" class="btn btn-warning">Continue Shoping</a>
             </td>
             <td colspan="2"><strong>Total Price</strong> </td>
             <td colspan="2"><strong>&#2547; {{order.get_totals}} /=</strong> </td>
@@ -50,7 +50,7 @@ Cart
 
 {% if not allredy_coupon %}
 
-<form action="{% url 'App_order:cart'%}" method="post">
+<form action="{% url 'cart'%}" method="post">
 
     {% if coupon %}
 

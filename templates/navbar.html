@@ -1,7 +1,9 @@
+{% load static %}
 {% load cart_tag %}
 <nav class="navbar navbar-expand-lg bg-light">
     <div class="container">
-        <a class="navbar-brand" href="{% url 'home' %}">Ecommerce</a>
+        <a class="navbar-brand" href="{% url 'home' %}"><img id = 'logo' src = "/static/logo/logo.png" height= 60 width = 100 class = 'left' /></a>
+        
         <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle Navigation"> <span class="navbar-toggler-icon" ></span> </button>
 
         <div class="collapse navbar-collapse" id="navbarNav">
@@ -20,11 +22,11 @@
                     
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 
-                        <a class="dropdown-item" href="#">Profile</a>
+                        <a class="dropdown-item" href="{% url 'profile' %}">Profile</a>
                         <a class="dropdown-item" href="#">Orders</a>
 
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Log Out</a>
+                        <a class="dropdown-item" href="{% url 'logout' %}">Log Out</a>
                     </div>
                 
                 </li>

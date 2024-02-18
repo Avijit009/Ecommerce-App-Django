@@ -37,53 +37,43 @@ def add_to_cart(request, pk):
 def cart_view(request):
     carts = Cart.objects.filter(user=request.user, purchased=False)
     orders = Order.objects.filter(user=request.user, ordered=False)
-    # context = {'carts':carts, 'order':order}
-    context = {'carts':carts}
+    context = {'carts': carts}
 
     if orders.exists():
         if orders[0].coupon:
-            context.update({
-                'allredy_coupon': True
-            })
+            context.update({'already_coupon': True})
         else:
-            context.update({
-                'allredy_coupon': False
-            })
-    coupon = Coupon.objects.all().order_by('-id')[0]
-    if coupon.is_expaired == False:
-        context.update({
-            'coupon': coupon
-        })
-    
+            context.update({'already_coupon': False})
+
+    coupons = Coupon.objects.all().order_by('-id')
+    if coupons.exists():
+        coupon = coupons[0]
+        if not coupon.is_expired:
+            context.update({'coupon': coupon})
 
     if request.method == 'POST':
         coupon_code = request.POST.get('coupon')
-        coupon_obj = Coupon.objects.filter(
-            coupon_code=coupon_code, is_expaired=False)
+        coupon_obj = Coupon.objects.filter(coupon_code=coupon_code, is_expired=False)
         if coupon_obj.exists():
             if orders[0].get_totals() < coupon_obj[0].min_amount:
-                messages.warning(
-                    request, f'Your Amount is Low You Have to Shoping up to {coupon_obj[0].min_amount} tk !')
+                messages.warning(request, f'Your Amount is Low. You have to shop for at least {coupon_obj[0].min_amount} tk!')
             else:
-
                 order = orders[0]
                 if order.coupon:
-
-                    messages.info(request, 'You Got Already Discount !')
+                    messages.info(request, 'You Already Have a Discount!')
                 else:
                     order.coupon = coupon_obj[0]
                     order.save()
-                    messages.success(request, 'Coupon applied Successfully !')
+                    messages.success(request, 'Coupon applied successfully!')
                     return HttpResponseRedirect(reverse('App_order:cart'))
         else:
-            messages.warning(request, 'Invalid Coupon !')
+            messages.warning(request, 'Invalid Coupon!')
 
     if carts.exists() and orders.exists():
-        context = {'order':order}
-        order = orders[0]
-        return render (request, 'order/cart.html', context=context)
+        context['order'] = orders[0]
+        return render(request, 'order/cart.html', context=context)
     else:
-        messages.warning(request, "You don't have any item in your cart")
+        messages.warning(request, "You don't have any items in your cart.")
         return redirect('home')
 
 @login_required
