@@ -41,6 +41,10 @@ def log_out(request):
 
 @login_required
 def user_profile(request):
+    return render(request,'account/profile.html',)
+
+@login_required
+def update_profile(request):
     profile = Profile.objects.get(user = request.user)
     
     form = ProfileForm(instance=profile)
@@ -50,7 +54,7 @@ def user_profile(request):
             form.save()
             messages.success(request, "Updated!")
             form = ProfileForm(instance=profile)
-    return render(request,'account/profile.html', context = {'form':form})
+    return render(request,'account/update_profile.html', context = {'form':form})
 
 @login_required
 def create_vendor(request):
@@ -65,17 +69,15 @@ def create_vendor(request):
                     vendor_form = form.save(commit=False)
                     vendor_form.user = request.user
                     vendor_form.save()
-                    messages.success(
-                        request, 'Congratulations ! You Are Our Vendor Now')
+                    messages.success(request, 'Congratulations ! You Are Our Vendor Now')
                     return HttpResponseRedirect(reverse('home'))
         else:
             messages.warning(request, 'You Already a Vendor !')
             return HttpResponseRedirect(reverse('home'))
-
     else:
         messages.warning(request, 'Please fillup Your Profile Information !')
         return HttpResponseRedirect(reverse('profile'))
-
+    
     return render(request, 'account/vendor.html', context={'form': form})
 
 

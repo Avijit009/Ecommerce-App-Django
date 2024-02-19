@@ -1,0 +1,154 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+}
+
+.product{
+    width: 23%;
+    border: 1px solid #ccc;
+    margin: 15px 10px;
+}
+
+@media screen and (max-width:480px) {
+    .product{
+        width: 100%;
+        margin: unset;
+        margin-bottom: 15px;
+    }
+}
+
+.gallery-wrap .img-big-wrap{
+    height: 450px;
+    width: auto;
+    display: inline-block;
+    cursor: zoom-in;
+}
+
+.gallery-wrap .img-small-wrap .item-gallery{
+    height: 60px;
+    width: 60px;
+    border: 1px solid #ddd;
+    display: inline-block;
+    overflow: hidden;
+}
+
+.gallery-wrap .img-small-wrap{
+    text-align: center;
+}
+
+.gallery-wrap .img-small-wrap img{
+    max-width: 100%;
+    max-width: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+    cursor: zoom-in;
+}
+
+.card{
+    height:350px;
+}
+.card-product:after{
+    content: "";
+    display: table;
+    clear: both;
+    visibility: hidden;
+}
+.card-product, .card-new, .price{
+    margin-right: 5px;
+}
+.card-product .price-old{
+    color: #999;
+}
+.card-product .img-wrap{
+    border-radius: 3px 3px 0 0;
+    overflow: hidden;
+    position: relative;
+    height: 220px;
+    text-align: center;
+}
+
+.card-product .img-wrap img{
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: cover;
+}
+
+.card-product .info-wrap{
+    overflow: hidden;
+    padding: 15px;
+    border-top: 1px solid #eee;
+}
+
+.card-product .action-wrap{
+    padding-top: 4px;
+    margin-top: 4px;
+}
+
+.card-product .bottom-wrap{
+    padding: 15px;
+    border-top: 1px solid #eee;
+}
+
+.card-product .title{
+    margin-top: 0px;
+}
+
+.text-decoration {
+    text-decoration: none;
+}
+
+.logo{
+    height: 60px;
+    width: 100px;
+}
+
+.card{
+    height:350px;
+}
+.card-product:after{
+    content: "";
+    display: table;
+    clear: both;
+    visibility: hidden;
+}
+.card-product, .card-new, .price{
+    margin-right: 5px;
+}
+.card-product .price-old{
+    color: #999;
+}
+.card-product .img-wrap{
+    border-radius: 3px 3px 0 0;
+    overflow: hidden;
+    position: relative;
+    height: 220px;
+    text-align: center;
+}
+
+.card-product .img-wrap img{
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: cover;
+}
+
+.card-product .info-wrap{
+    overflow: hidden;
+    padding: 15px;
+    border-top: 1px solid #eee;
+}
+
+.card-product .action-wrap{
+    padding-top: 4px;
+    margin-top: 4px;
+}
+
+.card-product .bottom-wrap{
+    padding: 15px;
+    border-top: 1px solid #eee;
+}
+
+.card-product .title{
+    margin-top: 0px;
+}

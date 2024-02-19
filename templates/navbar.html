@@ -1,9 +1,7 @@
-{% load static %}
 {% load cart_tag %}
-<nav class="navbar navbar-expand-lg bg-light">
+<nav class="navbar navbar-expand-lg bg-secondary">
     <div class="container">
-        <a class="navbar-brand" href="{% url 'home' %}"><img id = 'logo' src = "/static/logo/logo.png" height= 60 width = 100 class = 'left' /></a>
-        
+        <a class="navbar-brand" href="{% url 'home' %}"><img class="logo" src="/static/logo/logo.png" alt=""></a>
         <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle Navigation"> <span class="navbar-toggler-icon" ></span> </button>
 
         <div class="collapse navbar-collapse" id="navbarNav">
@@ -16,23 +14,37 @@
                     </a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-user-tie"></i> {{request.user.profile.username}}
+                    {% if user.profile.full_name %}
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        {{user.profile.full_name}}
                     </a>
-                    
+                    {% else %}
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        {{user.email}}
+                    </a>
+                    {% endif %}
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-
                         <a class="dropdown-item" href="{% url 'profile' %}">Profile</a>
-                        <a class="dropdown-item" href="#">Orders</a>
-
+                        <a class="dropdown-item" href="{% url 'order' %}">Orders</a>
+                        {% if user.vendor_profile %}
+                        <a class="dropdown-item" href="{% url 'vendor_product' %}">View Your Product</a>
+                        <a class="dropdown-item" href="{% url 'add_product' %}">Add Product</a>
+                        {% endif %}
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{% url 'logout' %}">Log Out</a>
                     </div>
-                
                 </li>
+                {% if user.vendor_profile %}
                 {% else %}
                 <li class="nav-item">
-                    <a href="{% url 'login' %}" class="btn btn-primary"> Log In</a>
+                    <a class="nav-link" href="{% url 'vendor' %}">Become a Vendor?</a>
+                </li>
+                {% endif %}
+                {% else %}
+                <li class="nav-item">
+                    <a href="{% url 'login' %}" class="btn btn-primary"> Sign Up / Log In </a>
                 </li>
                 {% endif %}
             </ul>

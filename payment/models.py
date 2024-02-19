@@ -5,14 +5,14 @@ from django.conf import settings
 # Create your models here.
 
 class BillingAddress(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="saved_address")
     address = models.CharField(max_length=255, blank=True)
     zipcode = models.CharField(max_length=10, blank=True)
     city = models.CharField(max_length=50, blank=True)
     country = models.CharField(max_length=20, blank=True)
     
     def __str__(self) -> str:
-        return f'{self.user.profile.username} billing address'
+        return f'{self.user.profile.full_name} billing address'
     
     def is_fully_filled(self):
         field_names = [f.name for f in self._meta.get_fields()]

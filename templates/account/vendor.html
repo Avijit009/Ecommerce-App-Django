@@ -2,13 +2,13 @@
 {% load crispy_forms_tags %}
 
 {% block title %}
-Sellar Account
+Vendor Account
 {% endblock title %}
 
 
 {% block content %}
 <form action="" method="post">
-    <h1 class="text-center">Add Sellar Information</h1>
+    <h1 class="text-center">Add Vendor Information</h1>
     {% csrf_token %}
     {{form|crispy}}
     <input type="submit" value="Create" class="btn btn-primary">

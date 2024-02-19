@@ -15,10 +15,12 @@
                         <img src="/media/{{product.productimage}}" style="height: 250px;" alt="">
                     </div>
                     <figcaption class="info-wrap">
-                        <h6 class="title"> <a href="{% url 'product_details' pk=product.pk %}">{{product.name}}</a></h6>
+                        <h6 class="title"> <a class="text-decoration" href="{% url 'product_details' pk=product.pk %}">{{product.name}}</a></h6>
                         <div class="action-wrap">
                             <div class="price-wrap">
                                 <span class="price-new"> Price Now: &#2547; {{product.price|floatformat:2}}</span>
+                            </div>
+                            <div class="price-wrap">
                                 <span class="price-old"><strike> Old Price: &#2547; {{product.old_price|floatformat:2}}</strike></span>
                             </div>
                         </div>

@@ -102,6 +102,8 @@ DATABASES = {
 }
 
 #admin- avijitdash2@gmail.com-123456
+#user- a@gmail.com-123456@aa
+#vendor- vendor@gmail.com-123456@aa
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators

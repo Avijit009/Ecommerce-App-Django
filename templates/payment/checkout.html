@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load crispy_forms_tags %}
 {% block title %}
     Checkout
 {% endblock title %}
@@ -14,7 +14,7 @@
                 <div class="card mb-5">
                     <div class="card-body">
                         <form method="POST">
-                            {{form.as_p}}
+                            {{form|crispy}}
                             {% csrf_token %}
                             <button type="submit" class="btn btn-primary float-right">Save Address</button>
                         </form>
@@ -42,7 +42,7 @@
                 
                 <hr>
 
-                {% if saved_address.is_fully_filled %}
+                {% if user.saved_address.is_fully_filled %}
                     <a href="{% url 'payment' %}" class="btn btn-warning">Make Payment</a>
                 {% else %}
                     <div class="alert alert-info">

@@ -21,24 +21,23 @@ def checkout(request):
     order_qs = Order.objects.filter(user=request.user, ordered=False)
     order_items = order_qs[0].orderitems.all()
     order_total = order_qs[0].get_totals()
-    address_form = BillingAddressForm(instance=saved_address[0])
+    form = BillingAddressForm(instance=saved_address[0])
     if request.method == 'POST':
-        address_form = BillingAddressForm(
+        form = BillingAddressForm(
             data=request.POST, instance=saved_address[0])
-        if address_form.is_valid():
-            user_address_form = address_form.save(commit=False)
-            user_address_form.user = request.user
-            user_address_form.save()
-            address_form = BillingAddressForm(instance=saved_address[0])
+        if form.is_valid():
+            user_form = form.save(commit=False)
+            user_form.user = request.user
+            user_form.save()
+            form = BillingAddressForm(instance=saved_address[0])
             messages.success(request, 'Address Saved Successfully !')
             return redirect('checkout')
 
-    return render(request, 'payment/checkout.html', context={'address_form': address_form, 'order_items': order_items, 'order_total': order_total})
+    return render(request, 'payment/checkout.html', context={'form': form, 'order_items': order_items, 'order_total': order_total})
 
 
 @login_required
 def payment(request):
-
     profile = Profile.objects.filter(user=request.user)[0]
     saved_address = BillingAddress.objects.filter(user=request.user)[0]
 
@@ -52,8 +51,8 @@ def payment(request):
 
     order_qs = Order.objects.filter(user=request.user, ordered=False)
     order_total = order_qs[0].get_totals()
-    order_count = order_qs[0].order_items.count()
-    order_items = order_qs[0].order_items.all()
+    order_count = order_qs[0].orderitems.count()
+    order_items = order_qs[0].orderitems.all()
 
     store_id = 'phoen6548b63b58096'
     API_key = 'phoen6548b63b58096@ssl'
@@ -72,7 +71,7 @@ def payment(request):
     post_body['fail_url'] = status_url
     post_body['cancel_url'] = status_url
     post_body['emi_option'] = 0
-    post_body['cus_name'] = profile.fullname
+    post_body['cus_name'] = profile.full_name
     post_body['cus_email'] = current_user.email
     post_body['cus_phone'] = profile.phone
     post_body['cus_add1'] = profile.address
@@ -85,10 +84,10 @@ def payment(request):
     post_body['product_category'] = "Mixed"
     post_body['product_profile'] = "general"
 
-    post_body['ship_name'] = profile.fullname
+    post_body['ship_name'] = profile.full_name
     post_body['ship_add1'] = saved_address.address
     post_body['ship_city'] = saved_address.city
-    post_body['ship_postcode'] = saved_address.zip_code
+    post_body['ship_postcode'] = saved_address.zipcode
     post_body['ship_country'] = saved_address.country
 
     response = sslcommez.createSession(post_body)

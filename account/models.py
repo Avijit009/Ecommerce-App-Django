@@ -56,7 +56,6 @@ class User(AbstractBaseUser , PermissionsMixin):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
-    # username = models.CharField(max_length=255,blank=True)
     full_name = models.CharField(max_length=255, blank=True)
     address = models.TextField(max_length=300,blank=True)
     city = models.CharField(max_length=50,blank=True)
@@ -66,7 +65,7 @@ class Profile(models.Model):
     date_joined = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
-        return self.username + "'s profile"
+        return self.full_name + "'s profile"
     
     def is_fully_filled(self):
         fields_name = [f.name for f in self._meta.get_fields()]
@@ -76,15 +75,6 @@ class Profile(models.Model):
             if value is None or value=='':
                 return False
             return True
-
-@receiver(post_save , sender=User)
-def create_profile(sender, instance, created, **kwargs):
-    if created:
-        Profile.objects.create(user=instance)
-
-@receiver(post_save , sender=User)
-def save_profile(sender, instance, **kwargs):
-    instance.profile.save()
 
 class Vendor(models.Model):
     user = models.OneToOneField(
@@ -108,7 +98,6 @@ class Vendor(models.Model):
 def create_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
-
 
 @receiver(post_save, sender=User)
 def save_profile(sender, instance, **kwargs):
