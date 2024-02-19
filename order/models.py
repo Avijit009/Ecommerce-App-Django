@@ -6,7 +6,7 @@ from shop.models import Product
 
 class Coupon(models.Model):
     coupon_code = models.CharField(max_length=10)
-    is_expaired = models.BooleanField(default=False)
+    is_expired = models.BooleanField(default=False)
     discount = models.FloatField()
     min_amount = models.IntegerField(default=500)
 
@@ -52,7 +52,7 @@ class Order(models.Model):
         for order_item in self.orderitems.all():
             total += float(order_item.get_total())
 
-        if self.coupon and self.coupon.is_expaired == False:
+        if self.coupon and self.coupon.is_expired == False:
             if self.coupon.min_amount <= total:
                 total = total - (total * (self.coupon.discount/100))
                 return total

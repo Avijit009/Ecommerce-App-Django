@@ -48,5 +48,24 @@
                     </tr>
                 </tbody>
             </table>
-    </div>
+
+    {% if not allredy_coupon %}
+
+    <form action="{% url 'cart'%}" method="post">
+
+        {% if coupon %}
+
+        <p class="text-success"><b>'{{coupon.coupon_code}}'</b> use this coupon and get {{coupon.discount}}% discount !
+        </p>
+        {% endif %}
+
+        {% csrf_token %}
+        <input type="text" name="coupon" placeholder="Enter Coupon " class="form-control" style="width: 300px;"
+            required><br>
+        <input type="submit" value="Apply" class="btn btn-primary">
+    </form>
+    {% endif %}
+    
+</div>
+
 {% endblock content %}

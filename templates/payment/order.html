@@ -20,7 +20,7 @@
                 {% for order in orders %}
                 <tr>
                     <th scope="row">{{ forloop.counter }}</th>
-                    <td><a href="#">{{ order.orderId }}</a></td>
+                    <td>{{ order.orderId }}</td>
                     <td>
                     {% for item in order.orderitems.all %} {{item}} <br> {% endfor %}
                     </td>

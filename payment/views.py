@@ -113,11 +113,16 @@ def complete(request):
 def purchase(request, val_id, tran_id):
     order_qs = Order.objects.filter(user=request.user, ordered=False)
     order = order_qs[0]
-    orderId = tran_id
+    # orderId = tran_id
+    # order.ordered = True
+    # order.orderId = orderId
+    # order.paymentId = val_id
+    # orderId = tran_id
     order.ordered = True
-    order.orderId = orderId
-    order.paymentId = val_id
+    order.orderId = val_id
+    order.paymentId = tran_id
     order.save()
+
     cart_items = Cart.objects.filter(user=request.user, purchased=False)
     for item in cart_items:
         item.purchased = True

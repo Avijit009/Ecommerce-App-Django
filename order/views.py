@@ -65,7 +65,7 @@ def cart_view(request):
                     order.coupon = coupon_obj[0]
                     order.save()
                     messages.success(request, 'Coupon applied successfully!')
-                    return HttpResponseRedirect(reverse('App_order:cart'))
+                    return HttpResponseRedirect(reverse('cart'))
         else:
             messages.warning(request, 'Invalid Coupon!')
 

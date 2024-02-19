@@ -24,5 +24,5 @@ class OrderAdmin(admin.ModelAdmin):
 class CouponAdmin(admin.ModelAdmin):
     '''Admin View for Coupon'''
 
-    list_display = ('id', 'coupon_code', 'discount', 'min_amount','is_expaired')
+    list_display = ('id', 'coupon_code', 'discount', 'min_amount','is_expired')
     list_per_page = 10
