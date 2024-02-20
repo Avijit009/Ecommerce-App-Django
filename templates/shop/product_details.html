@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-{{product.name}} details
+{{ product.name }} details
 {% endblock %}
 
 {% block content %}
@@ -12,20 +12,20 @@
                     <article class="gallery-wrap">
                         <div class="img-big-wrap">
                             <div>
-                                <a href="#"><img src="/media/{{object.productimage}}"  style="width:320px" alt=""></a>
+                                <a href="#"><img src="/media/{{ object.productimage }}" style="width:320px" alt=""></a>
                             </div>
                         </div>
                     </article>
                 </aside>
                 <aside class="col-sm-7">
-                    <article class="card-body p-2">
-                        <h3 class="title mp-3">{{object.name}}</h3>
+                    <article class="card-body p-1">
+                        <h3 class="title mp-3">{{ object.name }}</h3>
                         <p class="price-detail-wrap">
-                            <span class="price h3 text-warning">
+                            <span class="price h3 text-success">
                                 <span class="currency">
-                                    BDT: &#2547; 
+                                    BDT: &#2547;
                                 </span>
-                                <span class="num">{{object.price}}</span>
+                                <span class="num">{{ object.price }}</span>
                             </span>
                         </p>
                         <!-- description tag -->
@@ -35,12 +35,22 @@
                             </dt>
                             <dd>
                                 <p>
-                                    {{object.description}}
+                                    {{ object.description }}
                                 </p>
                             </dd>
                         </dl>
-                        <a href="{% url 'add'  pk=object.pk %}" class="btn btn-sm btn-outline-primary text-uppercase"> <i class="fa fa-shopping-cart"></i> Add to Cart</a>
+                        <!-- vendor company name -->
+                        <dl class="item-property">
+                            <dd><strong>Vendor:</strong> {{ object.vendor.company_name }}</dd>
+                        </dl>
+                        
                     </article>
+                    {% if request.user.is_authenticated and request.user == object.vendor.user %}
+                        <a href="{% url 'home' %}" class="btn btn-sm btn-outline-primary text-uppercase">Back to Products</a>
+                        <a href="{% url 'update_product_details' pk=object.pk %}" class="btn btn-sm btn-outline-warning text-uppercase"> Update Product </a>
+                    {% else %}
+                        <a href="{% url 'add' pk=object.pk %}" class="btn btn-sm btn-outline-primary text-uppercase"> <i class="fa fa-shopping-cart"></i> Add to Cart</a>
+                    {% endif %}
                 </aside>
             </div>
         </div>

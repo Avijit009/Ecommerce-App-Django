@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{product.name}} details
+{% endblock %}
+
+{% block content %}
+    <div class="container my-5">
+        <div class="card">
+            <div class="row">
+                <aside class="col-sm-5 border-right">
+                    <article class="gallery-wrap">
+                        <div class="img-big-wrap">
+                            <div>
+                                <a href="#"><img src="/media/{{object.productimage}}"  style="width:320px" alt=""></a>
+                            </div>
+                        </div>
+                    </article>
+                </aside>
+                <aside class="col-sm-7">
+                    <article class="card-body p-2">
+                        <h3 class="title mp-3">{{object.name}}</h3>
+                        <p class="price-detail-wrap">
+                            <span class="price h3 text-warning">
+                                <span class="currency">
+                                    BDT: &#2547; 
+                                </span>
+                                <span class="num">{{object.price}}</span>
+                            </span>
+                        </p>
+                        <!-- description tag -->
+                        <dl class="item-property">
+                            <dt>
+                                Description
+                            </dt>
+                            <dd>
+                                <p>
+                                    {{object.description}}
+                                </p>
+                            </dd>
+                        </dl>
+                        <a href="{% url 'vendor_product' %}" class="btn btn-sm btn-outline-primary text-uppercase"> Back To Your Products </a>
+                        <a href="{% url 'update_product_details' pk=object.pk %}" class="btn btn-sm btn-outline-warning text-uppercase"> Update Product </a>
+                    </article>
+                </aside>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

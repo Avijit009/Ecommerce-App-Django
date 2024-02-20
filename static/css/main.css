@@ -152,3 +152,7 @@
 .card-product .title{
     margin-top: 0px;
 }
+
+.vendor-name{
+    font-weight: bold;
+}

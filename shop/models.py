@@ -21,7 +21,7 @@ class Product(models.Model):
     productimage = models.ImageField(upload_to='Products')
     name = models.CharField(max_length=255)
     price = models.FloatField(default=0.00)
-    old_price = models.FloatField(default=0.00)
+    old_price = models.FloatField(default=0.00, null=True, blank=True)
     preview_text = models.TextField(max_length=200, verbose_name='Preview Text')
     description = models.TextField(max_length=1000, verbose_name='Description')
     created_at = models.DateTimeField(auto_now_add=True)

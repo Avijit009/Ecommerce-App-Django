@@ -1,6 +1,6 @@
 from django.shortcuts import render,HttpResponseRedirect,get_object_or_404
-from django.urls import reverse
-from django.views.generic import ListView, DetailView
+from django.urls import reverse, reverse_lazy
+from django.views.generic import ListView, DetailView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -48,6 +48,18 @@ def view_vendor_product(request):
 
     else:
         messages.warning(request, 'You Are Not Our Sellar !')
-        return HttpResponseRedirect(reverse('App_shop:home'))
+        return HttpResponseRedirect(reverse('home'))
 
     return render(request, 'shop/vendor_product.html', context={'products':products})
+
+class VendorProductDetailsView(DetailView, LoginRequiredMixin):
+    model = Product
+    template_name = 'shop/vendor_product_details.html'
+
+class UpdateVendorProductDetailsView(UpdateView, LoginRequiredMixin):
+    model = Product
+    fields = '__all__';
+    template_name = 'shop/update_vendor_product_details.html'
+
+    def get_success_url(self):
+        return reverse_lazy('your_product_details', kwargs={'pk': self.object.pk})
