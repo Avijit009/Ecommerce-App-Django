@@ -44,10 +44,10 @@ def payment(request):
     if not profile.is_fully_filled():
         messages.warning(
             request, 'Please fill up all profile information first !')
-        return redirect('App_login:profile')
+        return redirect('profile')
     if not saved_address.is_fully_filled():
         messages.warning(request, 'Please fill up all  information first !')
-        return redirect('App_payment:checkout')
+        return redirect('checkout')
 
     order_qs = Order.objects.filter(user=request.user, ordered=False)
     order_total = order_qs[0].get_totals()
